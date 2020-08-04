@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.google.spsproject.HelloAppEngineTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.108 s <<< FAILURE! - in com.google.spsproject.HelloAppEngineTest
-initializationError(com.google.spsproject.HelloAppEngineTest)  Time elapsed: 0.018 s  <<< ERROR!
-java.lang.NoClassDefFoundError: Lcom/google/spsproject/HelloAppEngine;
-Caused by: java.lang.ClassNotFoundException: com.google.spsproject.HelloAppEngine
-
