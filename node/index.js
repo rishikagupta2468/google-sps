@@ -4,7 +4,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     port = 8000,
     methodOverride = require('method-override');
-
+   
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
 
@@ -102,6 +102,12 @@ app.delete('/report/:id', function (req, res) {
         res.redirect('/report');
     });
 });
+
+
+app.get("/bmi-calculator",async function(req,res){
+    res.render("./bmi-calculator/bmi-calculator");
+});
+
 
 // PORT
 app.listen(port, function () {
