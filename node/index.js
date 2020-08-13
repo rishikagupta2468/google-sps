@@ -10,7 +10,7 @@ var cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
   cloud_name: 'dk96tpgwo',
-  api_key: API_KEY,
+  api_key: YOUR_API_KEY,
   api_secret: API_SECRET
 });
 
