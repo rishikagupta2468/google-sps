@@ -103,6 +103,35 @@ app.delete('/report/:id', function (req, res) {
     });
 });
 
+app.get("/articles",async function(req,res){
+   const articles = await db.collection('articles').get();
+  res.render('articles/index', { articles: articles })
+});
+
+app.get("/articles/new",function(req,res){
+    res.render("articles/new");
+});
+
+app.post("/articles",function(req,res){
+
+    var title = req.body.title;
+    var description = req.body.description;
+    var markdown = req.body.markdown; 
+   db.collection("articles").add({
+        Title: title,
+        Description: description,
+        Markdown:markdown,
+        
+    })
+    .then(function() {
+        res.redirect("/articles");
+    })
+    .catch(function(error) {
+        console.log(error);
+        res.redirect("/articles");
+    });
+});
+
 // PORT
 app.listen(port, function () {
   console.log(`Running at ${port}`);
