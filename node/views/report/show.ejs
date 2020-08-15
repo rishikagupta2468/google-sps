@@ -1,0 +1,16 @@
+<%- include ("../partials/header")%>
+<%reports.forEach(function(report){%>
+    <article class="blog-post-wrapper">
+        <div class="post-thumbnail">
+            <img class="img img-responsive" src="<%= report.data().img %>" alt="report"style="width: 50em;height: 35em;">
+        </div>
+        <div class="post-information">
+            <div><p><%=report.data().description%></p></div>
+        </div>
+    </article>
+    <a href="/report/<%=report.id%>/edit">Edit</a>
+    <form action="/report/<%=report.id%>/?_method=DELETE" method="POST">
+        <button class="btn btn-danger btn-xs">Delete</button>
+    </form>
+<%});%>
+<%- include ("../partials/footer") %>
