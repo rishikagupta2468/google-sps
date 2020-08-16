@@ -29,8 +29,8 @@ h2 {
     margin-left: 150px;
 }
 
-#w,
-#h {
+#weight,
+#height {
     color: #222f3e;
     text-align: left;
     font-size: 20px;
@@ -42,8 +42,8 @@ h2 {
     width: 200px;
 }
 
-#w:focus,
-#h:focus {
+#weight:focus,
+#height:focus {
     border-bottom: 2px solid #341f97;
     width: 300px;
     transition: 0.5s;
@@ -53,7 +53,7 @@ h2 {
     color: #341f97;
 }
 
-#btn {
+#calculate-btn {
     font-family: inherit;
     margin-top: 10px;
     border: none;
@@ -70,7 +70,7 @@ h2 {
     box-shadow: 1px 1px 10px green;
 }
 
-#info {
+#enter-details-info {
     font-size: 12px;
     font-family: inherit;
 }

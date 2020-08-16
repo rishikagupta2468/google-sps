@@ -1,55 +1,95 @@
-function findstatus(bmio) {
-    if (bmio < 18.5) {
-        return 'underweight';
-    } else if (bmio < 24.9) {
-        return 'normal';
-    } else if (bmio < 29.9) {
-        return 'overweight'
-    } else {
-        return 'obese';
-    }
+const status = {
+    UNDERWEIGHT: 'underweight',
+    NORMAL: 'normal',
+    OVERWEIGHT: 'overweight',
+    OBESE: 'obese'
+
 }
 
-function setsuggestion(status) {
+function getStatus(bmi) {
+    if (bmi < 18.5) {
+        return status.UNDERWEIGHT;
+    } else if (bmi < 24.9) {
+        return status.NORMAL;
+    } else if (bmi < 29.9) {
+        return status.OVERWEIGHT;
+    } else {
+        return status.OBESE;
+    }
+}
+const suggestions = {
+    UNDERWEIGHT: 'Eat more frequently.Choose nutrient-rich foods. Drink water regulary and avoid skipping meals.',
+    NORMAL: 'Eat meals regulary and exercise',
+    OVERWEIGHT: 'Exercise daily.Drink good amount of water.Stop eating any kind of junk food.',
+    OBESE: 'Excercise regularly. Make a strict diet plan. It is recommended to consult a dietician.'
+}
+
+function getSuggestion(status) {
     if (status === 'underweight') {
-        return 'Eat more frequently.Choose nutrient-rich foods. Drink water regulary and avoid skipping meals.'
+        return suggestions.UNDERWEIGHT;
     } else if (status === 'normal') {
-        return 'Eat meals regulary and exercise';
+        return suggestions.NORMAL;
     } else if (status === 'overweight') {
-        return 'Exercise daily. Drink good amount of water. Stop eating any kind of junk food.'
+        return suggestions.OVERWEIGHT;
     } else {
-        return 'Excercise regularly. Make a strict diet plan. It is recommended to consult a dietician.'
+        return suggestions.OBESE;
     }
 }
 
-function BMI() {
-    var height = document.getElementById('h').value;
-    var weight = document.getElementById('w').value;
+function SetClassOfStatus(addclassname, removeclassname) {
 
-    if (height === '' || weight === '') {
-        alert('Please enter height and weight');
-    } else {
-        var bmi = weight / (height / 100 * height / 100);
-        var bmio = (bmi.toFixed(2));
-
-        var status = findstatus(bmio);
-
-
-        document.getElementById("result").innerHTML = "Your BMI is " + bmio;
-        document.getElementById("status").innerText = "You are " + status;
-        if (status === 'normal') {
-            document.getElementById("status").classList.add('green-text');
-            document.getElementById("suggestion").classList.add('blue-text')
-        } else {
-            document.getElementById("status").classList.add('red-text');
-            document.getElementById("suggestion").classList.add('blue-text')
-        }
-
-        var suggestion = setsuggestion(status);
-        document.getElementById("suggestion").innerText = ' Suggestion : ' + suggestion;
+    const status = document.getElementById("status");
+    if (status.classList.contains(removeclassname)) {
+        status.classList.remove(removeclassname);
+    }
+    if (!status.classList.contains(addclassname)) {
+        status.classList.add(addclassname);
     }
 
 }
-var btn = document.getElementById('btn');
 
-btn.addEventListener("click", BMI);
+function IsValid(height, weight) {
+
+    if (height === '' || weight === '' || isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+        console.log(typeof height)
+        return false;
+    } else {
+        return true;
+    }
+
+}
+
+function calculateBMI() {
+    var height = document.getElementById('height').value;
+    var weight = document.getElementById('weight').value;
+
+    if (!IsValid(height, weight)) {
+        alert('Please enter valid height and weight values');
+        return;
+    }
+    var bmi = weight / (height / 100 * height / 100);
+    bmi = (bmi.toFixed(2));
+
+    var status = getStatus(bmi);
+
+
+    document.getElementById("result").innerHTML = "Your BMI is " + bmi;
+    document.getElementById("status").innerText = "You are " + status;
+    if (status === 'normal') {
+        SetClassOfStatus('green-text', 'red-text ');
+
+    } else {
+
+        SetClassOfStatus('red-text', 'green-text');
+
+    }
+    document.getElementById("suggestion").classList.add('blue-text')
+
+    var suggestion = getSuggestion(status);
+    document.getElementById("suggestion").innerText = ' Suggestion : ' + suggestion;
+
+
+}
+var calculatebtn = document.getElementById('calculate-btn');
+
+calculatebtn.addEventListener("click", calculateBMI);

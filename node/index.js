@@ -10,8 +10,8 @@ var cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
   cloud_name: 'dk96tpgwo',
-  api_key: YOUR_API_KEY,
-  api_secret: API_SECRET
+  api_key: '257327353339548',
+  api_secret: 'c4ItASdO3ykmYH5T5U8Ga2q-VBM'
 });
 
 var storage = multer.diskStorage({
