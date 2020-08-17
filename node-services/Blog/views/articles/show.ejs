@@ -9,16 +9,13 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="mb-1"><%= article.title %></h1>
-    <div class="text-muted mb-2">
-      <%= article.createdAt.toLocaleDateString() %>
-    </div>
-    <a href="/" class="btn btn-secondary">All Articles</a>
-    <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+    <h1 class="mb-1"><%= article.data().Title %></h1>
+    <div><%= article.data().Description %></div>
+    <div><%= article.data().Markdown %></div>
+    <a href="/articles" class="btn btn-secondary">All Articles</a>
+    
 
-    <div>
-      <%- article.sanitizedHtml %>
-    </div>
+
   </div>
 </body>
 </html>

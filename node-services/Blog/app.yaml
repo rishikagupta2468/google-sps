@@ -1,6 +1,6 @@
 runtime: nodejs
 env: flex
-service: node
+service: articles
 
 
 manual_scaling:
