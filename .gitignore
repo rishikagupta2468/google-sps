@@ -11,3 +11,5 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 java/errorfile.log
+node-services/node_modules/
+node-services/key.json
