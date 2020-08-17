@@ -36,6 +36,27 @@ const dbOperations = {
     } catch (err) {
       throw new Error(err);
     }
+  },
+
+  login: async (User) => {
+    try {
+      const userReference = db.collection('users').doc(User.email);
+      const object = await userReference.get();
+
+      if (object.exists) {
+        const dataObject = object.data();
+        if (await bcrypt.compare(User.password, dataObject.password)) {
+          delete dataObject.password;
+          return { 'responseCode': '1', 'userData': dataObject}; //Logs user in
+        } else {
+            return { 'responseCode': '-1' }; //Wrong password
+        }
+      } else {
+        return { 'responseCode': '0' }; //User doesn't exist
+      }
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 }
 
