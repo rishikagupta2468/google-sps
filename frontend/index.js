@@ -1,6 +1,8 @@
 var express = require('express'),
     app = express(),
-    bodyParser = require('body-parser'),
+    bmiRoute=require("./routes/bmi-calculator");
+    homeRoute = require('./routes/home')
+    bodyParser = require('body-parser')
     port = 8080
 
 
@@ -9,10 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
 
-
-app.get("/",async function(req,res){
-    res.render("home");
-});
+app.use("/", homeRoute);
+app.use("/bmi-calculator", bmiRoute);
 
 
 // PORT
