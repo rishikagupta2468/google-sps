@@ -3,7 +3,7 @@ var router  = express.Router();
 var db = require("../database.js");
 
 const multer = require('multer');
-var cloudinary = require('cloudinary').v2;
+var cloudinary = require('../../../../software-product-sprint/node_modules/cloudinary').v2;
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
