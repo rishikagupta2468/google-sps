@@ -14,7 +14,6 @@ app.use(express.static(__dirname + '/public'));
 app.use("/", homeRoute);
 app.use("/bmi-calculator", bmiRoute);
 
-
 // PORT
 app.listen(port, function () {
   console.log(`Running at ${port}`);
