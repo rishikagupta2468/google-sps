@@ -13,3 +13,4 @@ buildNumber.properties
 java/errorfile.log
 node-services/node_modules/
 node-services/key.json
+frontend/.env
