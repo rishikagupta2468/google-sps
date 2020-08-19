@@ -4,14 +4,14 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     port = 8000,
     methodOverride = require('method-override');
-
+   
 const multer = require('multer');
 var cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
   cloud_name: 'dk96tpgwo',
-  api_key: '257327353339548',
-  api_secret: 'c4ItASdO3ykmYH5T5U8Ga2q-VBM'
+  api_key: YOUR_API_KEY,
+  api_secret: API_SECRET
 });
 
 var storage = multer.diskStorage({
@@ -102,6 +102,12 @@ app.delete('/report/:id', function (req, res) {
         res.redirect('/report');
     });
 });
+
+
+app.get("/bmi-calculator",async function(req,res){
+    res.render("./bmi-calculator/bmi-calculator");
+});
+
 
 // PORT
 app.listen(port, function () {
