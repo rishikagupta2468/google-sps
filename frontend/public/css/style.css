@@ -90,3 +90,7 @@
         line-height: 70px;
     }
 }
+
+.valid-text {
+    color: red;
+}

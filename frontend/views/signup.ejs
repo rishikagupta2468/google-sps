@@ -4,6 +4,9 @@
         <div class="form-icon">
             <span><i class="icon icon-user"></i></span>
         </div>
+        <% if (typeof valid !== 'undefined') { %>
+        <p class="valid-text"><%= valid %></p>
+        <% } %>
         <div class="form-group">
             <input type="text" class="form-control item" name="name" placeholder="Name">
         </div>
@@ -20,7 +23,7 @@
         <input type="radio" name="gender" value="Female"> Female
         <input type="radio" name="gender" value="Other"> Other
         <div class="form-group">
-            <button type="button" class="btn btn-block create-account">Create Account</button>
+            <button type="submit" class="btn btn-block create-account">Create Account</button>
         </div>
     </form>
 </div>
