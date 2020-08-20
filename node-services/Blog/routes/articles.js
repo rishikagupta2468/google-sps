@@ -1,90 +1,73 @@
 var express = require("express");
 var router  = express.Router();
-var db = require("../database.js");
-
+const articleDb = require('../controller/db');
+router.use(express.json());
+router.use(express.urlencoded({ extended: false }));
 
 router.get("/",async function(req,res){
-   const articles = await db.collection('articles').get();
-  res.render('articles/index', { articles: articles })
-});
-
-
-router.get("/new",function(req,res){
-    res.render("articles/new");
+   try {
+    responseObject = await articleDb.getAllArticles();
+    res.status(200).json(responseObject);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }   
 });
 
 router.get("/:id",async function(req,res){
-   var article = db.collection("articles").doc(req.params.id);
-    article.get().then(function(article) {
-        if (article.exists) {
-            res.render("articles/show", {article:article});
-        } else {
-            console.log("No such article!");
-            res.redirect("/articles");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-        res.redirect("/articles");
-    });
+
+   try {
+    responseObject = await articleDb.findArticle(req.params.id);
+    res.status(200).json(responseObject);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }   
+
 });
+
 router.post("/",function(req,res){
 
-    var title = req.body.title;
-    var description = req.body.description;
-    var markdown = req.body.markdown; 
-   db.collection("articles").add({
-        Title: title,
-        Description: description,
-        Markdown:markdown,
-        
-    })
-    .then(function() {
-       res.redirect("/articles")
-    })
-    .catch(function(error) {
-        console.log(error);
-        res.redirect("/articles");
-    });
+    try {
+    responseObject = articleDb.createNewArticle({'title': req.body.title,
+        'description' : req.body.description,
+        'markdown' : req.body.markdown });
+    res.status(200).json(responseObject);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
+    
 });
 
 router.get('/edit/:id', async function (req, res) {
 
-    var article = db.collection("articles").doc(req.params.id);
-    console.log("abc");
-    article.get().then(function(article) {
-        if (article.exists) {
-            console.log("if abc");
-            res.render("articles/edit", {article:article});
-            
-        } else {
-            console.log("No such article!");
-            res.redirect("/articles");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-        res.redirect("/articles");
-    });
+    try {
+    responseObject = await articleDb.findArticle(req.params.id);
+    res.status(200).json(responseObject);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }   
+  
 });
 
 router.put('/:id', async function (req, res) {
-    var title = req.body.title;
-    var description = req.body.description;
-    var markdown = req.body.markdown; 
-    db.collection("articles").doc(req.params.id).update({
-        "Title": title,
-        "Description": description,
-        "Markdown":markdown,
-    });
-    res.redirect("/articles");
+   try {
+    responseObject = await articleDb.editArticle({'title': req.body.title,
+        'description' : req.body.description,
+        'markdown' : req.body.markdown,
+        'id' : req.params.id });
+
+    res.status(200).json(responseObject);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }   
 });
 
 router.delete('/:id', function (req, res) {
-    db.collection("articles").doc(req.params.id).delete().then(function() {
-        res.redirect('/articles');
-    }).catch(function(error) {
-        console.log(error);
-        res.redirect('/articles');
-    });
+   try {
+    response = articleDb.deleteArticle(req.params.id);
+    res.status(200).send(response);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }   
 });
 
 module.exports = router;
