@@ -1,9 +1,10 @@
-var express = require("express");
-var router  = express.Router();
-var db = require("../database.js");
-
-const multer = require('multer');
-var cloudinary = require('../../../../software-product-sprint/node_modules/cloudinary').v2;
+const express = require("express"),
+    router  = express.Router(),
+    reportDb = require("../Controllers/report.js"),
+    cloudinary = require('cloudinary').v2,
+    multer = require('multer');
+router.use(express.json());
+router.use(express.urlencoded({ extended: false }));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -22,65 +23,59 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-router.get("/new",function(req,res){
-    res.render("report/new");
-});
-
-router.get("/",async function(req,res){
-    const reports = await db.collection('reports').get();
-    res.render("report/show",{reports: reports});
+router.get("/", async function(req,res) {
+    try {
+        reports = await reportDb.getAllReports();
+        res.status(200).json(reports);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }   
 });
 
 router.post("/", upload.single('image'), async function(req, res){
-    var desc = req.body.description;
+    const desc = req.body.description;
     const image = await cloudinary.uploader.upload("./public/upload/save.jpg");
-    db.collection("reports").add({
-        img: image.secure_url,
-        description: desc
-    })
-    .then(function(newReport) {
-        res.redirect("/report");
-    })
-    .catch(function(error) {
-        console.log(error);
-        res.redirect("/");
-    });
+    try {
+        reportObject = await reportDb.createReport({
+            'img': image.secure_url,
+            'description': desc
+        });
+        res.status(200).json(reportObject);
+    } catch(err) {
+        res.status(400).send(err.message);
+    }
 });
 
-router.get('/:id/edit', function (req, res) {
-    var report = db.collection("reports").doc(req.params.id);
-    report.get().then(function(report) {
-        if (report.exists) {
-            res.render("report/edit", {report:report});
-        } else {
-            console.log("No such document!");
-            res.redirect("/");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-        res.redirect("/");
-    });
+router.get('/:id', async function (req, res) {
+    try {
+        reportObject = await reportDb.findReportById(req.params.id);
+        res.status(200).json(reportObject);
+    } catch (err) {
+        res.status(400).send(err.message);
+    } 
 });
 
-// UPDATE Route
 router.put('/:id',upload.single('image'), async function (req, res) {
-    var desc = req.body.description;
+    const desc = req.body.description;
     const image = await cloudinary.uploader.upload("./public/upload/save.jpg");
-    db.collection("reports").doc(req.params.id).update({
-        "img": image.secure_url,
-        "description": desc
-    });
-    res.redirect("/report");
+    try {
+        reportObject = await reportDb.editReport({
+            'img': image.secure_url,
+            'description': desc
+        });
+        res.status(200).json(reportObject);
+    } catch(err) {
+        res.status(400).send(err.message);
+    }
 });
 
-//DELETE Route
 router.delete('/:id', function (req, res) {
-    db.collection("reports").doc(req.params.id).delete().then(function() {
-        res.redirect('/report');
-    }).catch(function(error) {
-        console.log(error);
-        res.redirect('/report');
-    });
+    try {
+        status = reportDb.deleteReport(req.params.id);
+        res.status(200).send(status);
+    } catch (err) {
+        res.status(400).send(err.message);
+    } 
 });
 
 module.exports = router;

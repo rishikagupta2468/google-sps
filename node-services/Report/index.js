@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
-    port = 8000,
+    port = 8080,
     methodOverride = require('method-override'),
     reportRoute=require("./routes/report");
 
