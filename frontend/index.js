@@ -1,20 +1,25 @@
-var express = require('express'),
+const express = require('express'),
     app = express(),
-    bmiRoute=require("./routes/bmi-calculator");
-    homeRoute = require('./routes/home')
-    bodyParser = require('body-parser')
-    port = 8080
-
+    bmiRoute=require("./routes/bmi-calculator"),
+    homeRoute = require('./routes/home'),
+    authenticateRoute = require('./routes/authenticate'),
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    generalMiddleware = require('./middlewares/generalMiddleware'),
+    PORT = 8080 || process.env.PORT
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + '/public'));
+app.use(express.static("public"));
+app.use(generalMiddleware);
 
 app.use("/", homeRoute);
 app.use("/bmi-calculator", bmiRoute);
+app.use("/authenticate", authenticateRoute);
 
 // PORT
-app.listen(port, function () {
-  console.log(`Running at ${port}`);
+app.listen(PORT, function () {
+  console.log(`Running at ${PORT}`);
 });

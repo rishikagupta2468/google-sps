@@ -27,8 +27,12 @@
                 <div class="navbar-nav">
                     <a href="/" class="nav-item nav-link">Home</a>
                     <a href="#" class="nav-item nav-link">About</a>
+                    <% if (typeof email === 'undefined') { %>
                     <a href="/authenticate/login" class="nav-item nav-link">Login</a>
                     <a href="/authenticate/signup" class="nav-item nav-link">Signup</a>
+                    <% } else {%>
+                    <a href="/authenticate/logout"  class="nav-item nav-link">Logout</a>
+                    <% } %>
                 </div>
             </div>
         </div>
