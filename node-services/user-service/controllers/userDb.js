@@ -1,6 +1,16 @@
 const db = require('../dbInstance');
 const bcrypt = require('bcrypt');
-const { validateEmail, validateUserParameters } = require('./validateParameters');
+const { validateEmail, validateUserParameter } = require('./validateParameters');
+
+//Response codes for signup
+// 0 -> user already exists
+// 1 -> user created successfully 
+
+
+//Response codes for login
+// -1 -> Wrong password
+//  0 -> User doesn't exists
+//  1 -> User login successful
 
 const dbOperations = {
   signup: async (User) => {
@@ -8,8 +18,8 @@ const dbOperations = {
       throw new Error("Invalid email format");
     }
     
-    if (!validateUserParameters(User.name) || !validateUserParameters(User.password) ||
-        !validateUserParameters(User.age) || !validateUserParameters(User.gender)
+    if (!validateUserParameter(User.name) || !validateUserParameter(User.password) ||
+        !validateUserParameter(User.age) || !validateUserParameter(User.gender)
     ) {
       throw new Error("Parameters can't be empty");
     }

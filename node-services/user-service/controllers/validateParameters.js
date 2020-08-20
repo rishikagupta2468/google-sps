@@ -4,7 +4,7 @@ const validate = {
     return regex.test(String(email).toLowerCase());
   },
 
-  validateUserParameters: (string) => {
+  validateUserParameter: (string) => {
     if (!string || string.length === 0) {
       return false;
     } else {
