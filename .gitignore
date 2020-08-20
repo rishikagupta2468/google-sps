@@ -1,4 +1,4 @@
-node/node_modules/
+node/
 frontend/node_modules/
 target/
 pom.xml.tag
@@ -11,5 +11,8 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 java/errorfile.log
-node-services/node_modules/
-node-services/key.json
+node-services/user-service/node_modules/
+node-services/user-service/key.json
+node-services/user-service/.env
+frontend/.env
+frontend/key.json
