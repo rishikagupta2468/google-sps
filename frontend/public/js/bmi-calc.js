@@ -3,10 +3,9 @@ const status = {
     NORMAL: 'normal',
     OVERWEIGHT: 'overweight',
     OBESE: 'obese'
-
 }
 
-function getStatus(bmi) {
+function getBmiStatus(bmi) {
     if (bmi < 18.5) {
         return status.UNDERWEIGHT;
     } else if (bmi < 24.9) {
@@ -24,31 +23,19 @@ const suggestions = {
     OBESE: 'Excercise regularly. Make a strict diet plan. It is recommended to consult a dietician.'
 }
 
-function getSuggestion(status) {
-    if (status === 'underweight') {
+function getSuggestion(currentstatus) {
+    if (currentstatus === status.UNDERWEIGHT) {
         return suggestions.UNDERWEIGHT;
-    } else if (status === 'normal') {
+    } else if (currentstatus === status.NORMAL) {
         return suggestions.NORMAL;
-    } else if (status === 'overweight') {
+    } else if (currentstatus === status.OVERWEIGHT) {
         return suggestions.OVERWEIGHT;
     } else {
         return suggestions.OBESE;
     }
 }
 
-function SetClassOfStatus(addclassname, removeclassname) {
-
-    const status = document.getElementById("status");
-    if (status.classList.contains(removeclassname)) {
-        status.classList.remove(removeclassname);
-    }
-    if (!status.classList.contains(addclassname)) {
-        status.classList.add(addclassname);
-    }
-
-}
-
-function IsValid(height, weight) {
+function isValidBmiInput(height, weight) {
 
     if (height === '' || weight === '' || isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
         console.log(typeof height)
@@ -63,25 +50,30 @@ function calculateBMI() {
     var height = document.getElementById('height').value;
     var weight = document.getElementById('weight').value;
 
-    if (!IsValid(height, weight)) {
+    if (!isValidBmiInput(height, weight)) {
         alert('Please enter valid height and weight values');
         return;
     }
     var bmi = weight / (height / 100 * height / 100);
     bmi = (bmi.toFixed(2));
 
-    var status = getStatus(bmi);
+    let currentstatus = getBmiStatus(bmi);
 
 
     document.getElementById("result").innerHTML = "Your BMI is " + bmi;
-    document.getElementById("status").innerText = "You are " + status;
-    if (status === 'normal') {
-        SetClassOfStatus('green-text', 'red-text ');
+    document.getElementById("status").innerText = "You are " + currentstatus;
+    const status = document.getElementById("status");
+    if (currentstatus === status.normal) {
+        status.classList.remove('green-text');  
+        if (!status.classList.contains('red-text')) {
+            status.classList.add('red-text');
+        }
 
     } else {
-
-        SetClassOfStatus('red-text', 'green-text');
-
+        status.classList.remove('red-text');
+        if (!status.classList.contains('green-text')) {
+            status.classList.add('green-text');
+        }
     }
     document.getElementById("suggestion").classList.add('blue-text')
 
@@ -90,6 +82,6 @@ function calculateBMI() {
 
 
 }
-var calculatebtn = document.getElementById('calculate-btn');
+var calculateBtn = document.getElementById('calculate-btn');
 
-calculatebtn.addEventListener("click", calculateBMI);
+calculateBtn.addEventListener("click", calculateBMI);
