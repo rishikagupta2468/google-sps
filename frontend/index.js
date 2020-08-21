@@ -6,7 +6,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     generalMiddleware = require('./middlewares/generalMiddleware'),
-    PORT = process.env.PORT || 8080
+    PORT =  8080
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
