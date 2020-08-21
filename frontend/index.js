@@ -3,7 +3,7 @@ const express = require('express'),
     bmiRoute=require("./routes/bmi-calculator"),
     homeRoute = require('./routes/home'),
     authenticateRoute = require('./routes/authenticate'),
-    articleRoute = require('./routes/articles'),
+    // articleRoute = require('./routes/articles'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     generalMiddleware = require('./middlewares/generalMiddleware'),
@@ -19,7 +19,7 @@ app.use(generalMiddleware);
 app.use("/", homeRoute);
 app.use("/bmi-calculator", bmiRoute);
 app.use("/authenticate", authenticateRoute);
-app.use("/articles", articleRoute);
+// app.use("/articles", articleRoute);
 
 // PORT
 app.listen(PORT, function () {
