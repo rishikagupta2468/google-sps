@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
-    port = 8080 || process.env.PORT,
+    port =  process.env.PORT || 8080,
     articleRoute=require("./routes/articles");
     methodOverride = require('method-override')
     
