@@ -13,9 +13,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use("/articles", articleRoute);
 
-app.get("/",function(req,res){
-    res.render("profile");
-});
 
 // PORT
 app.listen(port, function () {
