@@ -5,7 +5,7 @@ const status = {
     OBESE: 'obese'
 }
 
-function getStatus(bmi) {
+function getBmiStatus(bmi) {
     if (bmi < 18.5) {
         return status.UNDERWEIGHT;
     } else if (bmi < 24.9) {
@@ -35,8 +35,7 @@ function getSuggestion(currentstatus) {
     }
 }
 
-
-function IsValid(height, weight) {
+function isValidBmiInput(height, weight) {
 
     if (height === '' || weight === '' || isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
         console.log(typeof height)
@@ -51,14 +50,14 @@ function calculateBMI() {
     var height = document.getElementById('height').value;
     var weight = document.getElementById('weight').value;
 
-    if (!IsValid(height, weight)) {
+    if (!isValidBmiInput(height, weight)) {
         alert('Please enter valid height and weight values');
         return;
     }
     var bmi = weight / (height / 100 * height / 100);
     bmi = (bmi.toFixed(2));
 
-    let currentstatus = getStatus(bmi);
+    let currentstatus = getBmiStatus(bmi);
 
 
     document.getElementById("result").innerHTML = "Your BMI is " + bmi;
