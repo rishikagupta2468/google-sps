@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href = "css/bmi-calc.css">
+    <title>Medical website!</title>
+</head>
+
+<body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container">
+            <a href="#" class="navbar-brand">Website</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse9">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse9">
+                <div class="navbar-nav">
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/bmi-calculator" class="nav-item nav-link">Bmi Calculator</a>
+                    <a href="#" class="nav-item nav-link">About</a>
+                    <% if (typeof email === 'undefined') { %>
+                    <a href="/authenticate/login" class="nav-item nav-link">Login</a>
+                    <a href="/authenticate/signup" class="nav-item nav-link">Signup</a>
+                    <% } else {%>
+                    <a href="/authenticate/logout"  class="nav-item nav-link">Logout</a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
