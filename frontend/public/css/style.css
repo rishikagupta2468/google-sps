@@ -94,3 +94,15 @@
 .valid-text {
     color: red;
 }
+
+.whitediv{
+    background-color: whitesmoke;
+    text-align: center;
+    margin: auto;
+}
+
+.bluediv{
+     background-color: #5691ff;
+    text-align: center;
+    margin: auto;
+}
