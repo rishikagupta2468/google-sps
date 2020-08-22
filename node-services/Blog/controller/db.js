@@ -5,17 +5,20 @@ var express = require("express");
 const dbOperations = {
 
   getAllArticles: async () => {
-
-    try{
-    const articles = await db.collection('articles').get();
-    return { 'responseCode': '1', 'articles': articles};
-    }
-    catch(err)
-    {
-        throw new Error(err);   
-    }
-
+    const articles = await db.collection('articles')
+    const allArticles = []
+    await articles.get().then( async function(querySnapshot) {
+      for(var i in querySnapshot.docs)
+      {
+         allArticles.push( querySnapshot.docs[i].data());
+      }}).catch(function(error) {
+        console.log("Error getting documents: ", error);
+         return { 'responseCode': '0'}; 
+    });
+    
+    return { 'responseCode': '1', 'articles': allArticles}; 
   },  
+
   createNewArticle: (article) => {
     
     try {
