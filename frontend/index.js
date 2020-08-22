@@ -7,8 +7,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     generalMiddleware = require('./middlewares/generalMiddleware'),
-    PORT =  8080
-
+    PORT =  9000
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -19,7 +18,7 @@ app.use(generalMiddleware);
 app.use("/", homeRoute);
 app.use("/bmi-calculator", bmiRoute);
 app.use("/authenticate", authenticateRoute);
-// app.use("/articles", articleRoute);
+//app.use("/articles", articleRoute);
 
 // PORT
 app.listen(PORT, function () {

@@ -1,7 +1,7 @@
 <%- include ("./partials/header")%>
 
-<!--carousel start-->
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <!--carousel start-->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -19,7 +19,7 @@
                 <img src="images/sharereport.jpeg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-               <img src="images/calculatebmi.jpeg" class="d-block w-100" alt="...">
+                <img src="images/calculatebmi.jpeg" class="d-block w-100" alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -31,70 +31,99 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-<!-- carousel end-->
+    <!-- carousel end-->
 
 
-<!--About Us start-->
-<div class="jumbotron jumbotron-fluid whitediv">
-  <div class="container">
-    <h1 class="display-4">About Us</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
-</div>
-<!--About Us end-->
+    <!--About Us start-->
+    <div class="jumbotron jumbotron-fluid whitediv" id="aboutus">
+        <div class="container aboutus-container">
+            <h1 class="display-4">About Us</h1>
+            <p class="lead" id="aboutustext">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum..</p>
+            <img src="images/logo.PNG" id="logo">
+        </div>
+    </div>
+    <!--About Us end-->
 
-<!--Sample blogs start-->
-<div class="jumbotron bluediv">
-  <h1 class="display-4">Sample Blogs</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-<div class="card blogcard">
-  <div class="card-header">
-    Quote
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
+    <!--Sample blogs start-->
+    <div class="jumbotron bluediv">
+        <h1 class="display-4">Sample Blogs</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <div class="card blogcard">
+            <div class="card-header">
+                Quote
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+            </div>
+        </div>
 
-<div class="card blogcard">
-  <div class="card-header">
-    Quote
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
+        <div class="card blogcard">
+            <div class="card-header">
+                Quote
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+            </div>
+        </div>
 
-<div class="card blogcard">
-  <div class="card-header">
-    Quote
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
+        <div class="card blogcard">
+            <div class="card-header">
+                Quote
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+            </div>
+        </div>
 
-</div>
-<!--Sample blog end-->
+    </div>
+    <!--Sample blog end-->
 
-<!--Contact Us start-->
-<div class="jumbotron jumbotron-fluid whitediv">
-  <div class="container">
-    <h1 class="display-4">Contact Us</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
-</div>
-<!--Contact Us end-->
+    <!--Contact Us start-->
+    <div class="jumbotron jumbotron-fluid whitediv">
+        <div class="container">
+            <h1 class="display-4">Contact Us</h1>
+            <div class="contactus-cards-container" >
+                <div class="card contactus-card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+
+                <div class="card contactus-card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+
+                <div class="card contactus-card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+
+                 <div class="card contactus-card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Contact Us end-->
 
 
 <%- include ("./partials/footer") %>
