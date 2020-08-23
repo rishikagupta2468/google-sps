@@ -30,7 +30,7 @@ const dbOperations = {
         Title: title,
         Description: description,
         Markdown:markdown,
-        id:Id
+        
     })
     return { 'responseCode': '1' };
     }
