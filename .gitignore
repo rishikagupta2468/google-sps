@@ -16,3 +16,6 @@ node-services/user-service/key.json
 node-services/user-service/.env
 frontend/.env
 frontend/key.json
+node-services/sharing-service/node_modules/
+node-services/sharing-service/key.json
+node-services/sharing-service/.env
