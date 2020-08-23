@@ -32,7 +32,7 @@ const dbOperations = {
         Markdown:markdown,
         
     })
-    return { 'responseCode': '1' };
+    return { 'responseCode': '1', 'id' : Id };
     }
     catch(err)
     {
@@ -47,7 +47,7 @@ const dbOperations = {
 
       if (object.exists) {
         const dataObject = object.data(); 
-        return { 'responseCode': '1', 'articleData': dataObject}; 
+        return { 'responseCode': '1', 'articleData': dataObject, 'id' : id}; 
       } else {
         return { 'responseCode': '0' }; //article not found
       }
@@ -68,7 +68,7 @@ const dbOperations = {
         "Description": description,
         "Markdown":markdown,
     });
-    return { 'responseCode': '1' };
+    return { 'responseCode': '1', 'id' : id };
     }
     catch(err)
     {
@@ -79,7 +79,7 @@ const dbOperations = {
    deleteArticle: (id) => {
 
     db.collection("articles").doc(id).delete().then(function() {
-    return { 'responseCode': '1' };
+    return { 'responseCode': '1', 'id':id };
     }).catch(function(error) {
         console.log(error);
          return { 'responseCode': '0' };
