@@ -10,7 +10,7 @@ const dbOperations = {
     await articles.get().then( async function(querySnapshot) {
       for(var i in querySnapshot.docs)
       {
-         allArticles.push( querySnapshot.docs[i].data());
+         allArticles.push( {'id' : querySnapshot.docs[i].id, "articleData" : querySnapshot.docs[i].data()});
       }}).catch(function(error) {
         console.log("Error getting documents: ", error);
          return { 'responseCode': '0'}; 
