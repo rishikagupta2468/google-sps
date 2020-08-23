@@ -7,6 +7,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     generalMiddleware = require('./middlewares/generalMiddleware'),
+    methodOverride = require('method-override'),
     PORT =  8080
 
 
@@ -15,6 +16,7 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(generalMiddleware);
+app.use(methodOverride('_method'));
 
 app.use("/", homeRoute);
 app.use("/bmi-calculator", bmiRoute);
