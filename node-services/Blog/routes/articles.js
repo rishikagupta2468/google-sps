@@ -29,7 +29,8 @@ router.post("/",function(req,res){
     try {
     responseObject = articleDb.createNewArticle({'title': req.body.title,
         'description' : req.body.description,
-        'markdown' : req.body.markdown });
+        'markdown' : req.body.markdown,
+         'id' : req.params.id});
     res.status(200).json(responseObject);
     } catch (err) {
         res.status(400).send(err.message);

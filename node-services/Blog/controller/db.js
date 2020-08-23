@@ -25,11 +25,12 @@ const dbOperations = {
     var title = article.title;
     var description = article.description;
     var markdown = article.markdown; 
+    var Id = article.id;
     db.collection("articles").add({
         Title: title,
         Description: description,
         Markdown:markdown,
-        
+        id:Id
     })
     return { 'responseCode': '1' };
     }
