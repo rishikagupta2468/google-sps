@@ -2,7 +2,7 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     cors = require('cors'),
-    port = 8080,
+    port = port =  process.env.PORT || 8000,
     methodOverride = require('method-override'),
     reportRoute=require("./routes/report");
 
@@ -14,10 +14,6 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use("/report", reportRoute);
-
-app.get("/",function(req,res){
-    res.render("profile");
-});
 
 // PORT
 app.listen(port, function () {

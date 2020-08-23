@@ -2,32 +2,27 @@ const db = require("../database.js");
 
 const reportDbOperations = {
     getAllReports: async () => {
-        try{
-            const reports = await db.collection('reports').get();
-            if(reports.exists) {
-                const allReports = reports.data();
-                return { 'responseCode': '1', 'reports': allReports};
-            }
-            else{
-                return { 'responseCode': '0' };
-            }
-        } catch (err) {
-            throw new Error(err);
-        }
+        const reports = await db.collection('reports');
+        const allReports = [];
+        await reports.get().then( async function(querySnapshot) {
+        for(var i in querySnapshot.docs)
+        {
+            allReports.push( {'id' : querySnapshot.docs[i].id, "reportData" : querySnapshot.docs[i].data()});
+        }}).catch(function(error) {
+            console.log("Error getting documents: ", error);
+            return { 'responseCode': '0'}; 
+        });
+        return { 'responseCode': '1', 'reports': allReports}; 
     },
 
     findReportById: async(id) => {
-        try {
-            const reportReference = db.collection('reports').doc(id);
-            const report = await reportReference.get();
-            if (report.exists) {
-                const reportObject = report.data(); 
-                return { 'responseCode': '1', 'report': reportObject}; 
-            } else {
-                return { 'responseCode': '0' }; 
-            }
-        } catch (err) {
-            throw new Error(err);
+        const reportReference = db.collection('reports').doc(id);
+        const report = await reportReference.get();
+        if (report.exists) {
+            const reportObject = report.data(); 
+            return { 'responseCode': '1', 'id': reportObject.id, 'report': reportObject}; 
+        } else {
+            return { 'responseCode': '0' }; 
         }
     },
 
@@ -41,18 +36,15 @@ const reportDbOperations = {
     },
 
     editReport:  async(Report) => {
-        try{
-            db.collection("reports").doc(id).update({
-                "img": Report.img,
-                "description": Reportdescription,
-            });
-            return { 'responseCode': '1' };
-        }catch(err) {
-            throw new Error(err);
-        }
+        db.collection("reports").doc(Report.id).update({
+            "img": Report.img,
+            "description": Report.description
+        }).then(function(updateReport) {
+            return { 'responseCode': '1', 'reportReference': updateReport.id};
+        });
     },
 
-    deleteArticle: async(id) => {
+    deleteReport: async(id) => {
         db.collection("reports").doc(id).delete().then(function() {
             return { 'responseCode': '1' };
         }).catch(function(error) {
