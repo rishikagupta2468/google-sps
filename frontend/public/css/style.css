@@ -94,3 +94,44 @@
 .valid-text {
     color: red;
 }
+
+.whitediv{
+    background-color: whitesmoke;
+    text-align: center;
+    margin: auto;
+}
+
+.bluediv{
+     background-color: #5691ff;
+    text-align: center;
+    margin: auto;
+}
+#aboutus{
+  
+    overflow: hidden;
+}
+.blogcard{
+    margin: 1%;
+}
+
+.contactus-cards-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.contactus-card{
+    margin: 1%;
+    padding: 1%;
+
+}
+
+#logo{
+    float: right;
+    padding:4%;
+}
+
+#aboutustext{
+    float: left;
+    width:75%;
+    padding:4%;
+}

@@ -1,7 +1,9 @@
-var express = require("express");
-var router  = express.Router();
+const express = require("express");
+const router  = express.Router();
 
 router.get('/', async function (req, res) {
-     res.render("bmi-calculator");  
+  res.render("bmi-calculator", {
+    email: req.email
+  });  
 });
 module.exports = router;
