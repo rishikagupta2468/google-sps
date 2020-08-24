@@ -1,0 +1,24 @@
+.report-page{
+    margin-top: 4em;
+    padding: 3em;
+    background-color: #c2dff5;
+}
+.report{
+    padding: 2em;
+}
+.delete-button{
+    display: inline;
+}
+.report-image{
+    width: 10em;
+}
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+.card-footer{
+    text-align: right;
+}
+.form-image{
+    height: 25em;
+}

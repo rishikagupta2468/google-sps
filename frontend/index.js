@@ -1,9 +1,11 @@
+
 const express = require('express'),
     app = express(),
     bmiRoute=require("./routes/bmi-calculator"),
     homeRoute = require('./routes/home'),
     authenticateRoute = require('./routes/authenticate'),
     articleRoute = require('./routes/articles'),
+    reportRoute = require("./routes/report"),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     generalMiddleware = require('./middlewares/generalMiddleware'),
@@ -22,8 +24,10 @@ app.use("/", homeRoute);
 app.use("/bmi-calculator", bmiRoute);
 app.use("/authenticate", authenticateRoute);
 app.use("/articles", articleRoute);
+app.use("/report", reportRoute);
 
 // PORT
 app.listen(PORT, function () {
   console.log(`Running at ${PORT}`);
 });
+
