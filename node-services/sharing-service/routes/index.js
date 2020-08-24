@@ -8,14 +8,18 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 
-router.get('/', async (req, res) => {
+// responseCode -1 Empty email parameter
+// responseCode  0 User doesn't exist
+// responseCode  1 Report shared successfully
+
+router.post('/', async (req, res) => {
   try {
-    if (req.query.email) {
-      req.query.email = req.query.email.toLowerCase();
+    if (req.body.email) {
+      req.body.email = req.body.email.toLowerCase();
       const response = await fetch('https://user-service-dot-summer20-sps-77.df.r.appspot.com/checkuser', {
         method: 'post', 
-        query: JSON.stringify({
-          email: req.query.email
+        body: JSON.stringify({
+          email: req.body.email
         }),
         headers: { 'Content-Type': 'application/json' }
       });
@@ -29,19 +33,19 @@ router.get('/', async (req, res) => {
       });
     }
     doesExist = await shareReportWithOthers.checkIfExists({
-      id: req.query.id,
-      email: req.query.email
+      id: req.body.id,
+      email: req.body.email
     });
     if (doesExist.responseCode === '0') {
       const shareWithMe = shareReportWithMe.shareWithMe({
-        id: req.query.id,
-        email: req.query.email,
-        description: req.query.description,
-        reportOwner: req.query.reportOwner
+        id: req.body.id,
+        email: req.body.email,
+        description: req.body.description,
+        reportOwner: req.body.reportOwner
       });
       const shareWithOther = shareReportWithOthers.shareWithOthers({
-        id: req.query.id,
-        email: req.query.email
+        id: req.body.id,
+        email: req.body.email
       });
       Promise.all([shareWithOther, shareWithMe]).then(() => {
           return res.status(200).json({

@@ -1,6 +1,10 @@
 const db = require('../dbInstance');
 const { validateEmail, validateUserParameter } = require('./validateParameters');
 
+// checkIfExists responseCodes
+// 0 -> Report not shared beforehand
+// 1 -> Report already shared
+
 const dbOperations = {
   checkIfExists : async (reportObject) => {
     if (!validateEmail(reportObject.email)) {
