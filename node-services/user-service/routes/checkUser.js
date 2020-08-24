@@ -8,7 +8,7 @@ router.use(express.urlencoded({ extended: false }));
 router.post('/', async (req, res) => {
   try {
     responseObject = await doesUserExist(req.body.email);
-    res.status(200).send(responseObject);
+    res.status(200).json(responseObject);
   } catch (err) {
     res.status(400).send(err.message);
   }
