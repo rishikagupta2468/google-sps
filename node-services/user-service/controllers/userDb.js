@@ -23,7 +23,7 @@ const dbOperations = {
     ) {
       throw new Error("Parameters can't be empty");
     }
-    
+    User.email = User.email.toLowerCase();
     const hashedPassword = await bcrypt.hash(User.password, 10);
     const dataObject = {
       'name': User.name,
@@ -50,6 +50,9 @@ const dbOperations = {
 
   login: async (User) => {
     try {
+      if (User.email) {
+        User.email = User.email.toLowerCase();
+      }
       const userReference = db.collection('users').doc(User.email);
       const object = await userReference.get();
 
