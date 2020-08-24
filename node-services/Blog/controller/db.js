@@ -21,7 +21,7 @@ const dbOperations = {
 
   createNewArticle: (article) => {
     
-    try {
+    
     var title = article.title;
     var description = article.description;
     var markdown = article.markdown; 
@@ -33,15 +33,11 @@ const dbOperations = {
         
     })
     return { 'responseCode': '1', 'id' : Id };
-    }
-    catch(err)
-    {
-        throw new Error(err);
-    }
+    
   },
 
  findArticle: async (id) => {
-    try {
+    
       const articleReference = db.collection('articles').doc(id);
       const object = await articleReference.get();
 
@@ -51,14 +47,12 @@ const dbOperations = {
       } else {
         return { 'responseCode': '0' }; //article not found
       }
-    } catch (err) {
-      throw new Error(err);
-    }
+    
   },
 
    editArticle:  (article) => {
 
-    try{
+    
     var title = article.title;
     var description = article.description;
     var markdown = article.markdown; 
@@ -69,11 +63,7 @@ const dbOperations = {
         "Markdown":markdown,
     });
     return { 'responseCode': '1', 'id' : id };
-    }
-    catch(err)
-    {
-        throw new Error(err);
-    }
+   
   },
 
    deleteArticle: (id) => {
