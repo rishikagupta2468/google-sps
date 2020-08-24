@@ -1,22 +1,33 @@
-var express = require('express'),
+
+const express = require('express'),
     app = express(),
+    bmiRoute=require("./routes/bmi-calculator"),
+    homeRoute = require('./routes/home'),
+    authenticateRoute = require('./routes/authenticate'),
+    articleRoute = require('./routes/articles'),
+    reportRoute = require("./routes/report"),
     bodyParser = require('body-parser'),
-    cors = require('cors'),
-    port = 8000,
-    reportRoute = require("./routes/report");
-    methodOverride = require('method-override');
+    cookieParser = require('cookie-parser'),
+    generalMiddleware = require('./middlewares/generalMiddleware'),
+    methodOverride = require('method-override'),
+    PORT =  9000
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + '/public'));
+app.use(express.static("public"));
+app.use(generalMiddleware);
 app.use(methodOverride('_method'));
+
+app.use("/", homeRoute);
+app.use("/bmi-calculator", bmiRoute);
+app.use("/authenticate", authenticateRoute);
+app.use("/articles", articleRoute);
 app.use("/report", reportRoute);
 
-
 // PORT
-app.listen(port, function () {
-  console.log(`Running at ${port}`);
+app.listen(PORT, function () {
+  console.log(`Running at ${PORT}`);
 });
 

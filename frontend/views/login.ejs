@@ -1,0 +1,22 @@
+<%- include ("./partials/header")%>
+<div class="registration-form">
+    <form action="/authenticate/login" method="post">
+        <div class="form-icon">
+            <span><i class="icon icon-user"></i></span>
+        </div>
+        <% if (typeof valid !== 'undefined') { %>
+        <p class="valid-text"><%= valid %></p>
+        <% } %>
+        <div class="form-group">
+            <input type="text" class="form-control item" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control item" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block login">Login</button>
+        </div>
+    </form>
+</div>
+
+<%- include ("./partials/footer") %>
