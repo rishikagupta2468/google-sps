@@ -1,0 +1,12 @@
+<%- include ("../partials/header")%>
+
+  
+<div class="card text-center articles-bg-color">
+  <div  class="p-3 mb-2 bg-info text-white vertical-center"><h1><%= article.Title %></h1></div>
+  <div class="card-body articles-bg-color">
+    <h4 class="articles-bg-color "><%= article.Markdown %></h4>
+   <a href="/articles" class="btn btn-success">Read More Articles</a>
+</div>
+</div>
+
+<%- include ("../partials/footer")%>

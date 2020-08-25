@@ -1,4 +1,10 @@
-node/
+
+
+node-services/Blog/node_modules/
+node-services/Blog/key.json
+
+
+
 frontend/node_modules/
 target/
 pom.xml.tag
@@ -19,3 +25,4 @@ frontend/key.json
 node-services/sharing-service/node_modules/
 node-services/sharing-service/key.json
 node-services/sharing-service/.env
+
