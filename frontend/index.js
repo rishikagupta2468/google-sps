@@ -10,9 +10,11 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     port = process.env.PORT || 8000,
     generalMiddleware = require('./middlewares/generalMiddleware'),
-    methodOverride = require('method-override');
+    methodOverride = require('method-override')
 
 
+var cors = require('cors')
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
