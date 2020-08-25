@@ -8,6 +8,7 @@
     </div>
     <div class="row text-center>
         <%reports.forEach(report => {%>
+            <%if(email === report.reportData.user){%>
                 <div class="row">
                     <div class="col-12 report">
                         <div class="card">
@@ -28,6 +29,7 @@
                         </div>
                     </div>
                 </div>
+            <%}%>
         <%});%>
     </div>
 </div>
