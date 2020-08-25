@@ -13,62 +13,53 @@ const { validateEmail, validateUserParameter } = require('./validateParameters')
 //  1 -> User login successful
 
 const dbOperations = {
-  signup: async (User) => {
-    if (!validateEmail(User.email)) {
+  signup: async (user) => {
+    if (!validateEmail(user.email)) {
       throw new Error("Invalid email format");
     }
     
-    if (!validateUserParameter(User.name) || !validateUserParameter(User.password) ||
-        !validateUserParameter(User.age) || !validateUserParameter(User.gender)
+    if (!validateUserParameter(user.name) || !validateUserParameter(user.password) ||
+        !validateUserParameter(user.age) || !validateUserParameter(user.gender)
     ) {
       throw new Error("Parameters can't be empty");
     }
-    User.email = User.email.toLowerCase();
-    const hashedPassword = await bcrypt.hash(User.password, 10);
+    user.email = user.email.toLowerCase();
+    const hashedPassword = await bcrypt.hash(user.password, 10);
     const dataObject = {
-      'name': User.name,
+      'name': user.name,
       'password': hashedPassword,
-      'age': User.age,
-      'gender': User.gender
+      'age': user.age,
+      'gender': user.gender
+    }
+    //Check if user already exists
+    const userReference = db.collection('users').doc(user.email); 
+    const object = await userReference.get();
+    if (object.exists) {
+      return { 'responseCode': '0' };
     }
 
-    try {
-      //Check if user already exists
-      const userReference = db.collection('users').doc(User.email); 
-      const object = await userReference.get();
-      if (object.exists) {
-        return { 'responseCode': '0' };
-      }
-
-      //Create new user
-      const returnedObject = await db.collection('users').doc(User.email).set(dataObject);
-      return { 'responseCode': '1' };
-    } catch (err) {
-      throw new Error(err);
-    }
+    //Create new user
+    const returnedObject = await db.collection('users').doc(user.email).set(dataObject);
+    return { 'responseCode': '1' };
   },
 
-  login: async (User) => {
-    try {
-      if (User.email) {
-        User.email = User.email.toLowerCase();
-      }
-      const userReference = db.collection('users').doc(User.email);
-      const object = await userReference.get();
+  login: async (user) => {
+    if (user.email) {
+      user.email = user.email.toLowerCase();
+    }
+    const userReference = db.collection('users').doc(user.email);
+    const object = await userReference.get();
 
-      if (object.exists) {
-        const dataObject = object.data();
-        if (await bcrypt.compare(User.password, dataObject.password)) {
-          delete dataObject.password;
-          return { 'responseCode': '1', 'userData': dataObject}; //Logs user in
-        } else {
-            return { 'responseCode': '-1' }; //Wrong password
-        }
+    if (object.exists) {
+      const dataObject = object.data();
+      if (await bcrypt.compare(user.password, dataObject.password)) {
+        delete dataObject.password;
+        return { 'responseCode': '1', 'userData': dataObject}; //Logs user in
       } else {
-        return { 'responseCode': '0' }; //User doesn't exist
+          return { 'responseCode': '-1' }; //Wrong password
       }
-    } catch (err) {
-      throw new Error(err);
+    } else {
+      return { 'responseCode': '0' }; //User doesn't exist
     }
   }
 }

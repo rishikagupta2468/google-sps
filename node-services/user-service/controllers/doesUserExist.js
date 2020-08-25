@@ -6,8 +6,8 @@ const db = require('../dbInstance');
 const dbOperation = {
   doesUserExist: async (email) => {
     const userReference = db.collection('users').doc(email); 
-    const object = await userReference.get();
-    if (object.exists) {
+    const userObject = await userReference.get();
+    if (userObject.exists) {
       return { 'responseCode': '1' };
     } else {
       return { 'responseCode': '0' };
