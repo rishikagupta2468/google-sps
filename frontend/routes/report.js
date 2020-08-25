@@ -47,7 +47,6 @@ router.post("/",upload.single('image'), redirectMiddleware, async function(req,r
             headers: { 'Content-Type': 'application/json' }
         });
         if (reportResponse.status === 200) {
-            console.log("valid");
             res.redirect("/report");
         }
         else {
@@ -68,6 +67,7 @@ router.get("/new", redirectMiddleware, function (req,res){
 router.get('/:id/edit', redirectMiddleware, async function(req,res){
     const reportData = await fetch("https://reports-dot-summer20-sps-77.df.r.appspot.com/report/"+req.params.id);
     report = await reportData.json();
+    console.log(report);
     res.render("report/edit", {'id': req.params.id, 'report': report});
 });
 
