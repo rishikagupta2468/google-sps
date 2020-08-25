@@ -1,0 +1,34 @@
+<%- include ("../partials/header")%>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+          <div class="slider-content text-center">
+            <div class="header-bottom">
+              <div class="layer2 wow zoomIn" data-wow-duration="1s" data-wow-delay=".4s">
+                <div class="row">
+                  <div class="" style="width:70%;margin:auto">
+                    <h1 class="text-center">Add New Report</h1>
+                    <form action="/report" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="file" accept="image/*" name="image" onchange="loadFile(event)"class="form-control">
+                            <img id="output" class="form-image" src="/images/upload.png"/>                    
+                        </div>
+                        <div class="form-group">
+                            <textarea type="text" name="description" placeholder="Description" class="form-control"
+                            style="height: 5em;"></textarea>
+                        </div>
+                        <div class="actions">
+                            <button type="submit" class="btn btn-success btn-block">Submit</button>
+                        </div>
+                    </form>
+                    <a style="text-align:center" href="/report"><span class="text-center glyphicon glyphicon-chevron-left"></span>Go Back</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<%- include ("../partials/footer") %>
+

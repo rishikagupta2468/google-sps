@@ -1,0 +1,10 @@
+.articles-wrapper {
+    text-align: center;
+}
+
+.articles-button {
+    position: absolute;
+    top: 50%;
+}
+
+.articles-bg-color {background-color:#DDE9FA;}

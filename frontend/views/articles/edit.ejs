@@ -1,0 +1,27 @@
+<%- include ("../partials/header")%>
+
+
+  <div class="container">
+    <h1 class="mb-4">Edit Article</h1>
+
+    <form action="/articles/<%= article.id %>?_method=PUT" method="POST">
+      <div class="form-group">
+    <label for="title">Title</label>
+    <input required value = <%= article.articleData.Title %> type="text" name="title" id="title" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea name="description" id="description" class="form-control"><%= article.articleData.Description %></textarea>
+  </div>
+  <div class="form-group">
+    <label for="markdown">Body</label>
+    <textarea required name="markdown" id="markdown" class="form-control"><%= article.articleData.Markdown %></textarea>
+  </div>
+  
+  <a href="/articles" class="btn btn-secondary">Cancel</a>
+<button type="submit" class="btn btn-primary">Save</button>
+
+    </form>
+  </div>
+
+<%- include ("../partials/footer")%>
