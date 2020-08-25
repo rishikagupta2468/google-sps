@@ -10,9 +10,10 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     generalMiddleware = require('./middlewares/generalMiddleware'),
     methodOverride = require('method-override'),
-    PORT =  9000
+    PORT =  process.env.PORT || 9000
 
-
+var cors = require('cors')
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
