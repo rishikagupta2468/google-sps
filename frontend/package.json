@@ -23,14 +23,14 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "fetch": "^1.1.0",
-    "firebase": "^7.17.1",
+    "firebase": "^7.19.0",
     "gstore-node": "^7.2.5",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "multer": "^1.4.2",
     "multer-storage": "^0.4.1",
     "node-fetch": "^2.6.0",
-    "node-gyp": "^7.0.0",
+    "node-gyp": "^7.1.0",
     "nodemon": "^2.0.4"
   }
 }

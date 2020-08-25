@@ -3,6 +3,9 @@
     <div class="text-center">
       <h2>MY REPORTS</h2>
     </div>
+    <div class="actions">
+        <a href="/report/new" class="btn btn-primary btn-block">New report</a>
+    </div>
     <div class="row text-center>
         <%reports.forEach(report => {%>
                 <div class="row">
@@ -13,7 +16,7 @@
                                     <img class="report-image" src="<%= report.reportData.img %>" alt="report">
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text"><%=report.reportData.description%></p>
+                                    <p class="report-description card-text"><%=report.reportData.description%></p>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -28,4 +31,4 @@
         <%});%>
     </div>
 </div>
-<%- include ("../partials/footer") %>
+<%- include ("../partials/footer")%>
