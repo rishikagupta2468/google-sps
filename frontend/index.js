@@ -8,9 +8,9 @@ const express = require('express'),
     reportRoute = require("./routes/report"),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
+    port = process.env.PORT || 8000,
     generalMiddleware = require('./middlewares/generalMiddleware'),
-    methodOverride = require('method-override'),
-    PORT =  9000
+    methodOverride = require('method-override');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,7 +27,7 @@ app.use("/articles", articleRoute);
 app.use("/report", reportRoute);
 
 // PORT
-app.listen(PORT, function () {
-  console.log(`Running at ${PORT}`);
+app.listen(port, function () {
+  console.log(`Running at ${port}`);
 });
 
