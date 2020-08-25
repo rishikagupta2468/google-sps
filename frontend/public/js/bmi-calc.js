@@ -83,6 +83,6 @@ function calculateBMI() {
 
 }
 var calculateBtn = document.getElementById('calculate-btn');
-
-calculateBtn.addEventListener("click", calculateBMI);
+if(calculateBtn)
+    calculateBtn.addEventListener("click", calculateBMI);
 

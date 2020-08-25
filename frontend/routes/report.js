@@ -2,7 +2,14 @@ const express = require("express"),
     fetch = require('node-fetch'),
     cloudinary = require('cloudinary').v2,
     multer = require('multer'),
+    redirectMiddleware = require('../middlewares/redirectMiddleware'),
     router  = express.Router();
+
+cloudinary.config({ 
+  cloud_name: 'dk96tpgwo', 
+  api_key: '257327353339548', 
+  api_secret: 'c4ItASdO3ykmYH5T5U8Ga2q-VBM' 
+});
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -21,25 +28,25 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-router.get("/", async function(req, res){
+router.get("/", redirectMiddleware, async function(req, res){
     const reportData = await fetch("https://reports-dot-summer20-sps-77.df.r.appspot.com/report");
     reports = await reportData.json();
     res.render("report/index", {reports: reports.reports});
 });
 
-router.post("/",upload.single('image'), async function(req,res){
+router.post("/",upload.single('image'), redirectMiddleware, async function(req,res){
     const image = await cloudinary.uploader.upload("./public/upload/save.jpg");
     try {
         const reportResponse = await fetch('https://reports-dot-summer20-sps-77.df.r.appspot.com/report', {
         method: 'POST', 
         body: JSON.stringify({
             description: req.body.description,
-            image: image.secure_url
+            image: image.secure_url,
+            user: req.email
         }),
             headers: { 'Content-Type': 'application/json' }
         });
         if (reportResponse.status === 200) {
-            console.log("valid");
             res.redirect("/report");
         }
         else {
@@ -53,17 +60,17 @@ router.post("/",upload.single('image'), async function(req,res){
     }
 });
 
-router.get("/new", function (req,res){
+router.get("/new", redirectMiddleware, function (req,res){
   res.render('report/new');
 });
 
-router.get('/:id/edit', async function(req,res){
+router.get('/:id/edit', redirectMiddleware, async function(req,res){
     const reportData = await fetch("https://reports-dot-summer20-sps-77.df.r.appspot.com/report/"+req.params.id);
     report = await reportData.json();
     res.render("report/edit", {'id': req.params.id, 'report': report});
 });
 
-router.put("/:id",upload.single('image'), async function(req, res){
+router.put("/:id",upload.single('image'), redirectMiddleware, async function(req, res){
     const image = await cloudinary.uploader.upload("./public/upload/save.jpg");
     try {
         const reportResponse = await fetch('https://reports-dot-summer20-sps-77.df.r.appspot.com/report/'+req.params.id+'/?_method=PUT', {
@@ -88,7 +95,7 @@ router.put("/:id",upload.single('image'), async function(req, res){
     }
 });
 
-router.delete('/:id', async function (req, res) {
+router.delete('/:id', redirectMiddleware, async function (req, res) {
     const response = await fetch('https://reports-dot-summer20-sps-77.df.r.appspot.com/report/'+req.params.id+'/?_method=DELETE', {
         method: 'POST'
     });
