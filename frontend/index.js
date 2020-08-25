@@ -1,3 +1,4 @@
+
 const express = require('express'),
     app = express(),
     bmiRoute=require("./routes/bmi-calculator"),
@@ -29,3 +30,4 @@ app.use("/report", reportRoute);
 app.listen(PORT, function () {
   console.log(`Running at ${PORT}`);
 });
+
