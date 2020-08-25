@@ -21,7 +21,8 @@ router.post("/", async function(req, res){
     try {
         reportObject = await reportDb.createReport({
             'img': image,
-            'description': desc
+            'description': desc,
+            'email': req.body.email
         });
         res.status(200).json(reportObject);
     } catch(err) {

@@ -29,7 +29,8 @@ const reportDbOperations = {
     createReport: async(Report) => {
         db.collection("reports").add({
             img: Report.img,
-            description: Report.description
+            description: Report.description,
+            user: Report.email
         }).then(function(newReport) {
             return { 'responseCode': '1', 'reportReference': newReport.id};
         });
