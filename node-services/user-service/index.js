@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', require('./routes/authenticate'));
+app.use('/checkuser', require('./routes/checkUser'));
 
 app.listen(PORT, () => {
   console.log(`Server started at ${PORT}`);
