@@ -31,7 +31,7 @@ var upload = multer({ storage: storage });
 router.get("/", redirectMiddleware, async function(req, res){
     const reportData = await fetch("https://reports-dot-summer20-sps-77.df.r.appspot.com/report");
     reports = await reportData.json();
-    res.render("report/index", {reports: reports.reports});
+    res.render("report/index", {reports: reports.reports, email: req.email});
 });
 
 router.post("/",upload.single('image'), redirectMiddleware, async function(req,res){
@@ -61,13 +61,13 @@ router.post("/",upload.single('image'), redirectMiddleware, async function(req,r
 });
 
 router.get("/new", redirectMiddleware, function (req,res){
-  res.render('report/new');
+  res.render('report/new', {email: req.email});
 });
 
 router.get('/:id/edit', redirectMiddleware, async function(req,res){
     const reportData = await fetch("https://reports-dot-summer20-sps-77.df.r.appspot.com/report/"+req.params.id);
     report = await reportData.json();
-    res.render("report/edit", {'id': req.params.id, 'report': report});
+    res.render("report/edit", {id: req.params.id, report: report, email: req.email});
 });
 
 router.put("/:id",upload.single('image'), redirectMiddleware, async function(req, res){
