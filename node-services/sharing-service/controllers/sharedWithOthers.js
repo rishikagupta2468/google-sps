@@ -1,13 +1,13 @@
 const db = require('../dbInstance');
 const { validateEmail, validateUserParameter } = require('./validateParameters');
 
-// checkIfExists responseCodes
+// checkIfReportAlreadyExists responseCodes
 // 0 -> Report not shared beforehand
 // 1 -> Report already shared
 
 const dbOperations = {
-  checkIfExists : async (reportObject) => {
-    if (!validateEmail(reportObject.email)) {
+  checkIfReportAlreadyExists : async (reportObject, email) => {
+    if (!validateEmail(email)) {
       throw new Error("Invalid email");
     }
     if (!validateUserParameter(reportObject.id)) {
@@ -27,13 +27,13 @@ const dbOperations = {
       docId = doc.id;
     });
     const userSnapshot = await collectionReference.doc(docId)
-        .collection('users').where('email', '==', reportObject.email).get();
+        .collection('users').where('email', '==', email).get();
     if (userSnapshot.empty) {
       return { responseCode: '0' }
     }
     return { responseCode: '1' }
   }
-  ,shareWithOthers : async (reportObject) => {
+  ,shareWithOthers : async (reportObject, email) => {
     const collectionReference = db.collection('sharedWithOthers');
     const reportSnapshot = await collectionReference
         .where('reportId', '==', reportObject.id).get();
@@ -45,15 +45,16 @@ const dbOperations = {
     tryRequest = async (currentAttempt, delay) => {
       try {
         const userRef = await collectionReference.doc(docId).collection('users').add({
-            email: reportObject.email
+            email
         });
       } catch (err) {
         if (currentAttempt <= maxTries) {
           setTimeout(async () => {
             await tryRequest(currentAttempt + 1, delay * 2);
           }, delay);
+        } else {
+          throw error;
         }
-        throw error;
       }
     }
     await tryRequest(1, 50);

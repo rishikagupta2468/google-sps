@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     if (req.body.email) {
       req.body.email = req.body.email.toLowerCase();
       const response = await fetch('https://user-service-dot-summer20-sps-77.df.r.appspot.com/checkuser', {
-        method: 'post', 
+        method: 'post',
         body: JSON.stringify({
           email: req.body.email
         }),
@@ -32,21 +32,18 @@ router.post('/', async (req, res) => {
         responseCode: '-1'
       });
     }
-    doesExist = await shareReportWithOthers.checkIfExists({
-      id: req.body.id,
-      email: req.body.email
-    });
-    if (doesExist.responseCode === '0') {
+    isReportAlreadyShared = await shareReportWithOthers.checkIfReportAlreadyExists({
+      id: req.body.reportId
+    }, req.body.email);
+    if (isReportAlreadyShared.responseCode === '0') {
       const shareWithMe = shareReportWithMe.shareWithMe({
-        id: req.body.id,
-        email: req.body.email,
+        id: req.body.reportId,
         description: req.body.description,
         reportOwner: req.body.reportOwner
-      });
+      }, req.body.email);
       const shareWithOther = shareReportWithOthers.shareWithOthers({
-        id: req.body.id,
-        email: req.body.email
-      });
+        id: req.body.reportId
+      }, req.body.email);
       Promise.all([shareWithOther, shareWithMe]).then(() => {
           return res.status(200).json({
             responseCode: '1'

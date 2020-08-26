@@ -2,8 +2,8 @@ const db = require('../dbInstance');
 const { validateEmail, validateUserParameter } = require('./validateParameters');
 
 const dbOperations = {
-  shareWithMe : async (reportObject) => {
-    if (!validateEmail(reportObject.email)) {
+  shareWithMe : async (reportObject, email) => {
+    if (!validateEmail(email)) {
       throw new Error("Invalid email");
     }
     if (!validateUserParameter(reportObject.id) || !validateUserParameter(reportObject.reportOwner)
@@ -11,7 +11,7 @@ const dbOperations = {
       throw new Error("Invalid parameter");
     }
     const collectionReference = db.collection('sharedWithMe');
-    const userReference = collectionReference.doc(reportObject.email);
+    const userReference = collectionReference.doc(email);
     const maxTries = 5;
     tryRequest = async (currentAttempt, delay) => {
       try {
@@ -25,8 +25,9 @@ const dbOperations = {
           setTimeout(async () => {
             await tryRequest(currentAttempt + 1, delay * 2);
           }, delay);
+        } else {
+          throw err;
         }
-        throw err;
       }
     }
     await tryRequest(1, 50);
