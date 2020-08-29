@@ -1,0 +1,25 @@
+<%- include ("../partials/header")%>
+<div class="container-fluid report-page">
+    <div class="text-center">
+      <h2>Family's Reports</h2>
+    </div>
+    <div class="row text-center">
+        <%reports.forEach(report => {%>
+            <div class="row" style="width: 100%">
+                <div class="col-12 report">
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <div class="img-square-wrapper">
+                                <img class="report-image" src="<%= report.reportId %>" alt="report">
+                            </div>
+                            <div class="card-body">
+                                <p class="report-description card-text"><%=report.reportDescription%></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%});%>
+    </div>
+</div>
+<%- include ("../partials/footer")%>

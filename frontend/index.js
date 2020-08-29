@@ -27,6 +27,8 @@ app.use("/bmi-calculator", bmiRoute);
 app.use("/authenticate", authenticateRoute);
 app.use("/articles", articleRoute);
 app.use("/report", reportRoute);
+app.use("/", require('./routes/sharereport'));
+app.use("/", require('./routes/sharedreports'));
 
 // PORT
 app.listen(port, function () {

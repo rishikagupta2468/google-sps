@@ -6,10 +6,10 @@
     <div class="actions">
         <a href="/report/new" class="btn btn-primary btn-block">New report</a>
     </div>
-    <div class="row text-center>
+    <div class="row text-center">
         <%reports.forEach(report => {%>
             <%if(email === report.reportData.user){%>
-                <div class="row">
+                <div class="row" style="width: 100%">
                     <div class="col-12 report">
                         <div class="card">
                             <div class="card-horizontal">
@@ -21,6 +21,12 @@
                                 </div>
                             </div>
                             <div class="card-footer">
+                                <form action="/share" method="GET">
+                                    <input type="hidden" name="img" value="<%= report.reportData.img %>">
+                                    <input type="hidden" name="description" value="<%= report.reportData.description %>">
+                                    <!--<input type="submit" value="Share">-->
+                                    <button type="submit" class="btn btn-secondary">Share Report with Family</button>
+                                </form>
                                 <a href="/report/<%=report.id%>/edit" class="btn btn-primary btn-xs">Edit</a>
                                 <form action="/report/<%=report.id%>/?_method=DELETE" method="POST" class="delete-button">
                                     <button class="btn btn-danger btn-xs">Delete</button>

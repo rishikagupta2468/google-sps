@@ -33,5 +33,17 @@
 .form-image{
     height: 25em;
 }
+.shared-image {
+    height: 100px;
+    width: 200px;
+}
 
+.success {
+    color:green;
+    text-align: left;
+}
 
+.error {
+    color: red;
+    text-align: left;
+}
