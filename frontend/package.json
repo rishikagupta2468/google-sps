@@ -11,17 +11,14 @@
   "dependencies": {
     "@google-cloud/datastore": "^6.1.0",
     "@google-cloud/firestore": "^4.2.0",
-    "async": "^3.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.22.0",
     "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "fetch": "^1.1.0",
     "firebase": "^7.19.0",
     "gstore-node": "^7.2.5",
     "jsonwebtoken": "^8.5.1",
@@ -33,8 +30,7 @@
     "nodemon": "^2.0.4",
     "async": "^3.2.0",
     "cors": "^2.8.5",
-    "fetch": "^1.1.0",
-    "node-fetch": "^2.6.0"
+    "fetch": "^1.1.0"
   },
   "devDependencies": {},
   "description": ""
