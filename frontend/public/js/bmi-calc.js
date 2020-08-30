@@ -77,7 +77,7 @@ function calculateBMI() {
     }
     document.getElementById("suggestion").classList.add('blue-text')
 
-    var suggestion = getSuggestion(status);
+    var suggestion = getSuggestion(currentstatus);
     document.getElementById("suggestion").innerText = ' Suggestion : ' + suggestion;
 
 
