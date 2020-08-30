@@ -10,7 +10,7 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     generalMiddleware = require('./middlewares/generalMiddleware'),
     methodOverride = require('method-override'),
-    PORT =  process.env.PORT || 9000
+    PORT =  process.env.PORT || 8080
 
 var cors = require('cors')
 app.use(cors())
