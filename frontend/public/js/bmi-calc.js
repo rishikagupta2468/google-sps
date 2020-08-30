@@ -77,13 +77,17 @@ function calculateBMI() {
         }
     }
     document.getElementById("suggestion").classList.add('blue-text')
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 96b1e40688343a478dddd364d0b7105a6d27b0ca
     var suggestion = getSuggestion(currentstatus);
     document.getElementById("suggestion").innerText = ' Suggestion : ' + suggestion;
 
 
 }
 var calculateBtn = document.getElementById('calculate-btn');
-
-calculateBtn.addEventListener("click", calculateBMI);
+if(calculateBtn)
+    calculateBtn.addEventListener("click", calculateBMI);
 

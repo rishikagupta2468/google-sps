@@ -6,19 +6,19 @@ router.get("/",async function(req,res){
  
   const data = await fetch('https://articles-dot-summer20-sps-77.df.r.appspot.com/articles');
   const article = await data.json();
-  res.render('articles/index', { articles: article.articles })
+  res.render('articles/index', { articles: article.articles,email: req.email})
 });
 
 
 router.get("/new",function(req,res){
-    res.render("articles/new");
+    res.render("articles/new", {email: req.email});
 });
 
 router.get("/:id",async function(req,res){
 
   const data = await fetch(`https://articles-dot-summer20-sps-77.df.r.appspot.com/articles/${req.params.id}`);
   const article = await data.json();
-  res.render("articles/show", {article:article.articleData});
+  res.render("articles/show", {article:article.articleData,email: req.email});
 });
 
 router.post("/",async function(req,res){
@@ -51,7 +51,7 @@ router.get('/edit/:id', async function (req, res) {
 
     const data = await fetch(`https://articles-dot-summer20-sps-77.df.r.appspot.com/articles/edit/${req.params.id}`);
     const article = await data.json();
-    res.render("articles/edit", {article:article});
+    res.render("articles/edit", {article:article,email: req.email});
 });
 
 router.put('/:id', async function (req, res) {

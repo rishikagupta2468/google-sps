@@ -8,9 +8,15 @@ const express = require('express'),
     reportRoute = require("./routes/report"),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
+    port = process.env.PORT || 8000,
     generalMiddleware = require('./middlewares/generalMiddleware'),
+<<<<<<< HEAD
     methodOverride = require('method-override'),
     PORT =  process.env.PORT || 8080
+=======
+    methodOverride = require('method-override')
+
+>>>>>>> 96b1e40688343a478dddd364d0b7105a6d27b0ca
 
 var cors = require('cors')
 app.use(cors())
@@ -28,7 +34,7 @@ app.use("/articles", articleRoute);
 app.use("/report", reportRoute);
 
 // PORT
-app.listen(PORT, function () {
-  console.log(`Running at ${PORT}`);
+app.listen(port, function () {
+  console.log(`Running at ${port}`);
 });
 
