@@ -14,7 +14,8 @@ router.get('/shared', redirectMiddleware, async (req, res) => {
     });
     const json = await responseObject.json();
     res.render("report/shared", {
-      reports: json.reports
+      reports: json.reports,
+      email: req.email
     });
   } catch(err) {
     res.send(err.message);

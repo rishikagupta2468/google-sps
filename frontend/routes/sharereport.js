@@ -3,7 +3,18 @@ const express = require("express"),
     fetch = require("node-fetch"),
     router  = express.Router();
 
-router.get("/share", redirectMiddleware, (req, res) => {
+router.get("/share", redirectMiddleware, async (req, res) => {
+  let isReportLegit = false;
+  const reportData = await fetch("https://reports-dot-summer20-sps-77.df.r.appspot.com/report");
+  reports = await reportData.json();
+  reports['reports'].forEach((report) => {
+    if (report.reportData.user === req.email && report.reportData.img === req.query.img) {
+      isReportLegit = true;
+    }
+  });
+  if (isReportLegit === false) {
+    return res.redirect("/");
+  }
   res.render("report/share", {
     img: req.query.img,
     description: req.query.description,
@@ -16,7 +27,7 @@ router.get("/share", redirectMiddleware, (req, res) => {
 router.post("/share", async (req, res) => {
   try {
     const responseObject = await fetch('https://sharing-service-dot-summer20-sps-77.df.r.appspot.com/share', {
-      method: 'POST', 
+      method: 'POST',
       body: JSON.stringify({
           email: req.body.email,
           reportId: req.body.reportid,
